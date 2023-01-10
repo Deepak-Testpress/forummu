@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Add new post{% endblock %}
+{% block content %}
+    <div class="px-4 py-4 sm:px-6 lg:px-8">
+        <form class="space-y-8 divide-y divide-gray-200" method="post">
+            {% csrf_token %}
+            <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+              <div class="space-y-6 sm:space-y-5">
+                <div>
+                  <h3 class="text-lg font-medium leading-6 text-gray-900">Adding new Post on Topic "{{ topic.subject }}"</h3>
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500"></p>
+                </div>
+          
+                <div class="space-y-6 sm:space-y-5">
+                  <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Message</label>
+                    <div class="mt-1 sm:col-span-2 sm:mt-0">
+                    <textarea id="message" name="message" rows="3" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" aria-invalid="true">{{message}}</textarea>
+                      <p class="mt-2 text-sm text-gray-500">Write a message about your topic.</p>
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+            </div>
+          
+            <div class="pt-5">
+              <div class="flex justify-center">
+                <button type="submit" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Post</button>
+              </div>
+            </div>
+          </form>
+      </div>
+
+  
+{% endblock %}

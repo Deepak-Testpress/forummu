@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ topic.subject }}{% endblock %}
+
+{% block content %}
+<div class="px-4 py-4 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-center">
+        <div class="sm:flex-auto">
+            <h1 class="text-xl font-semibold text-gray-900">SUB: {{ topic.subject }}</h1>
+            <p class="mt-2 text-sm text-gray-700"> Created by {{ topic.starter }}</p>
+        </div>
+        <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+            <button type="button"
+                class="inline-flex items-center justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                <a href="{% url 'add_post' topic.board.id topic.id %}">Add Post</a></button>
+        </div>
+    </div>
+</div>
+<div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+    <dl class="sm:divide-y sm:divide-gray-200">
+        {% for post in topic.posts.all %}
+        <div class="px-4 py-4 sm:px-6 lg:px-8 border-solid">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                    <h1 class="text-m font-semibold text-gray-900">{{ post.created_by.username }} <span
+                            style="color: grey; font-size: small;">posted at {{ post.created_at }}</span></h1>
+                    <p class="mt-2 text-sm text-gray-700">{{ post.message }}</p>
+                </div>
+                {% if post.created_by == user %}
+
+                <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                    <button type="button"
+                        class="inline-flex items-center justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                        <a href="{% url 'edit_post' topic.board.id topic.id post.id %}">Edit</a> </button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+</div>
+</div>
+{% endblock %}
